@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+    
+    while (t--) {
+        int n;
+        cin >> n;
+        
+        // Correctly declaring a 2D vector (matrix)
+        vector<vector<int>> matrix(n, vector<int>(n));
+        
+        // Reading the input for the matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) { // Use j++ here
+                cin >> matrix[i][j];
+            }
+        }
+        
+        map<int, vector<int>> diagonalMap;
+
+        // Storing elements based on their diagonal key
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                int diagonalKey = i - j; // Calculate the diagonal key
+                diagonalMap[diagonalKey].push_back(matrix[i][j]); // Store the element
+            }
+        }
+
+        int sum = 0;
+        
+       
+        for (const auto& pair : diagonalMap) {
+         
+            int mini = INT_MAX; 
+            for (int num : pair.second) {
+                mini = min(num, mini);
+            }
+            if (mini < 0) {
+                sum += mini; 
+            }
+        }
+
+        cout << abs(sum) << endl; // Output the result for the test case
+
+    }
+    
+    return 0;
+}
